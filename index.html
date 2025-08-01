@@ -20,24 +20,17 @@
 </head>
 <body>
 
-<div id="map"></div>
-
-<script>
-  mapboxgl.accessToken = 'pk.eyJ1Ijoia2NsYXJrOSIsImEiOiJjbWRzZXl1d3UwcTA0MnRvZzJmMTU2N2hoIn0.qB9Oslwgj7vvNbXFWWgfnQ';
-  const map = new mapboxgl.Map({
-    container: 'map',
-    style: 'mapbox://styles/kclark9/cmdsilo3h002101p6he6f4jvo',
-    center: [-77.0940, 38.9842],
-    zoom: 15
-  });
-
- <!-- 🔹 Add filter buttons just before the map's closing </body> tag -->
+<!-- 🔹 Filter buttons -->
 <div style="padding: 12px; text-align: center;">
   <button onclick="filterMarkers('all')">All</button>
   <button onclick="filterMarkers('dining')">Dining</button>
   <button onclick="filterMarkers('culture')">Culture</button>
 </div>
 
+<!-- 🔹 Map container -->
+<div id="map"></div>
+
+<!-- 🔹 Script to load Mapbox and markers -->
 <script>
   mapboxgl.accessToken = 'pk.eyJ1Ijoia2NsYXJrOSIsImEiOiJjbWRzZXl1d3UwcTA0MnRvZzJmMTU2N2hoIn0.qB9Oslwgj7vvNbXFWWgfnQ';
 
@@ -99,17 +92,14 @@
     });
   }
 
-  // Show all on load
   map.on('load', () => {
     addMarkers('all');
   });
 
-  // Called on button click
   function filterMarkers(category) {
     addMarkers(category);
   }
 </script>
-
 
 </body>
 </html>
