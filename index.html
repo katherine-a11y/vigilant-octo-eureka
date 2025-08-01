@@ -24,7 +24,7 @@
 <div style="padding: 12px; text-align: center;">
   <button onclick="filterMarkers('all')">All</button>
   <button onclick="filterMarkers('dining')">Dining</button>
-  <button onclick="filterMarkers('culture')">Culture</button>
+  <button onclick="filterMarkers('arts')">Arts</button>
 </div>
 
 <!-- 🔹 Map container -->
@@ -41,14 +41,14 @@
     zoom: 15
   });
 
-  const pois = [
+ const pois = [
   {
     name: "Bethesda Row",
     description: "Dining + shopping destination",
     lat: 38.9806,
     lng: -77.0955,
     category: "dining",
-    link: "https://www.google.com/maps/place/4827+Bethesda+Ave,+Bethesda,+MD+20814"
+    link: "https://www.google.com/maps/dir/?api=1&destination=38.9806,-77.0955"
   },
   {
     name: "Imagination Stage",
@@ -56,15 +56,18 @@
     lat: 38.9829,
     lng: -77.0961,
     category: "arts",
-    link: "https://www.google.com/maps/place/Imagination+Stage,+4908+Auburn+Ave,+Bethesda,+MD+20814"
+    link: "https://www.google.com/maps/dir/?api=1&destination=38.9829,-77.0961"
   },
   {
     name: "Lilit Cafe & Beer & Wine Store",
     description: "Gluten‑free cafe & beer & wine store",
-    lat: 38.9848,
-    lng: -77.0942,
+    lat: 38.9885,
+    lng: -77.10046,
     category: "dining",
-    link: "https://www.google.com/maps/place/Lilit+Cafe+%26+Beer+%26+Wine+Store,+7921+Old+Georgetown+Rd,+Bethesda,+MD+20814"
+    link: "https://www.google.com/maps/dir/?api=1&destination=38.9885,-77.10046"
+  }
+];
+
   }
 ];
 
