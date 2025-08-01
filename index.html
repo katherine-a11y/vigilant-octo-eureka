@@ -31,45 +31,30 @@
     zoom: 15
   });
 
- const pois = [
-  {
-    name: "Bethesda Row",
-    description: "Dining + shopping destination",
-    lat: 38.9823,
-    lng: -77.0947,
-    link: "https://maps.app.goo.gl/ZkL5KwH9F7MgdhXR7"
-  },
-  {
-    name: "Imagination Stage",
-    description: "Children’s theater and classes",
-    lat: 38.9829,
-    lng: -77.0961,
-    link: "https://imaginationstage.org"
-  },
-  {
-    name: "Lilit Cafe",
-    description: "Casual spot with gluten-free eats",
-    lat: 38.9848,
-    lng: -77.0942,
-    link: "https://maps.app.goo.gl/pMXptjZYZDNiyYhd9"
-  }
-];
+ <!-- 🔹 Add filter buttons just before the map's closing </body> tag -->
+<div style="padding: 12px; text-align: center;">
+  <button onclick="filterMarkers('all')">All</button>
+  <button onclick="filterMarkers('dining')">Dining</button>
+  <button onclick="filterMarkers('culture')">Culture</button>
+</div>
 
-// Add markers
-pois.forEach(poi => {
-  const marker = new mapboxgl.Marker({ color: "#2b6cb0" })
-    .setLngLat([poi.lng, poi.lat])
-    .setPopup(
-      new mapboxgl.Popup().setHTML(`
-        <strong>${poi.name}</strong><br>
-        ${poi.description}<br>
-        <a href="${poi.link}" target="_blank">Get directions</a>
-      `)
-    )
-    .addTo(map);
-});
+<script>
+  mapboxgl.accessToken = 'pk.eyJ1Ijoia2NsYXJrOSIsImEiOiJjbWRzZXl1d3UwcTA0MnRvZzJmMTU2N2hoIn0.qB9Oslwgj7vvNbXFWWgfnQ';
 
-</script>
+  const map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/kclark9/cmdsilo3h002101p6he6f4jvo',
+    center: [-77.0940, 38.9842],
+    zoom: 15
+  });
+
+  const pois = [
+    {
+      name: "Bethesda Row",
+      description: "Dining + shopping destination",
+      lat: 38.9823,
+      lng: -77.0947,
+      category: "dining",
 
 </body>
 </html>
