@@ -35,6 +35,7 @@
     <button onclick="filterMarkers('all')">All</button>
     <button onclick="filterMarkers('dining')">Dining</button>
     <button onclick="filterMarkers('arts')">Arts</button>
+    <button onclick="locateUser()">Near Me</button>
   </div>
 
   <script>
@@ -56,24 +57,23 @@
         category: "dining",
         address: "4827 Bethesda Ave, Bethesda, MD 20814"
       },
-  {
-    name: "Imagination Stage",
-    description: "Children’s theater and classes",
-    lat: 38.98994383474525,
-    lng: -77.09983109366554,
-    category: "arts",
-    address: "4908 Auburn Ave, Bethesda, MD 20814"
-  },
-  {
-    name: "Lilit Cafe",
-    description: "Casual spot with gluten-free eats",
-    lat: 38.988916343307324,
-    lng: -77.10049356798586,
-    category: "dining",
-    address: "7921 Old Georgetown Rd, Bethesda, MD 20814"
-  }
-];
-
+      {
+        name: "Imagination Stage",
+        description: "Children’s theater and classes",
+        lat: 38.98994383474525,
+        lng: -77.09983109366554,
+        category: "arts",
+        address: "4908 Auburn Ave, Bethesda, MD 20814"
+      },
+      {
+        name: "Lilit Cafe",
+        description: "Casual spot with gluten-free eats",
+        lat: 38.988916343307324,
+        lng: -77.10049356798586,
+        category: "dining",
+        address: "7921 Old Georgetown Rd, Bethesda, MD 20814"
+      }
+    ];
 
     const allMarkers = [];
 
@@ -105,6 +105,28 @@
 
     function filterMarkers(category) {
       addMarkers(category);
+    }
+
+    function locateUser() {
+      if (!navigator.geolocation) {
+        alert("Geolocation is not supported by your browser.");
+        return;
+      }
+
+      navigator.geolocation.getCurrentPosition(position => {
+        const userLng = position.coords.longitude;
+        const userLat = position.coords.latitude;
+
+        // Add "You are here" marker
+        new mapboxgl.Marker({ color: "red" })
+          .setLngLat([userLng, userLat])
+          .setPopup(new mapboxgl.Popup().setText("You are here"))
+          .addTo(map);
+
+        map.flyTo({ center: [userLng, userLat], zoom: 15 });
+      }, () => {
+        alert("Unable to retrieve your location.");
+      });
     }
   </script>
 
