@@ -1,100 +1,19 @@
-<script>
-  mapboxgl.accessToken = 'pk.eyJ1Ijoia2NsYXJrOSIsImEiOiJjbWRzZXl1d3UwcTA0MnRvZzJmMTU2N2hoIn0.qB9Oslwgj7vvNbXFWWgfnQ';
+<body>
+  <div id="map-container" style="position: relative;">
+    <div id="map" style="width: 100%; height: 75vh;"></div>
 
-  const map = new mapboxgl.Map({
-    container: 'map',
-    style: 'mapbox://styles/kclark9/cmdsilo3h002101p6he6f4jvo',
-    center: [-77.0940, 38.9842],
-    zoom: 15
-  });
+    <!-- Button controls -->
+    <div style="position: absolute; top: 10px; right: 10px; z-index: 1; display: flex; flex-direction: column; gap: 8px;">
+      <button onclick="filterMarkers('all')" style="background:#2b6cb0;color:white;padding:8px;border:none;border-radius:4px;">All</button>
+      <button onclick="filterMarkers('dining')" style="background:#2b6cb0;color:white;padding:8px;border:none;border-radius:4px;">Dining</button>
+      <button onclick="filterMarkers('shopping')" style="background:#2b6cb0;color:white;padding:8px;border:none;border-radius:4px;">Shopping</button>
+      <button onclick="filterMarkers('arts')" style="background:#2b6cb0;color:white;padding:8px;border:none;border-radius:4px;">Arts</button>
+      <button onclick="locateUser()" style="background:#2b6cb0;color:white;padding:8px;border:none;border-radius:4px;">Near Me</button>
+    </div>
+  </div>
 
-  const pois = [
-    {
-      name: "Bethesda Row",
-      description: "Dining + Shopping destination",
-      lat: 38.9823,
-      lng: -77.0947,
-      category: ["dining", "shopping"],
-      link: "https://www.google.com/maps?q=Bethesda+Row"
-    },
-    {
-      name: "Imagination Stage",
-      description: "Children’s theater and classes",
-      lat: 38.98994383474525,
-      lng: -77.09983109366554,
-      category: ["arts"],
-      link: "https://www.google.com/maps?q=Imagination+Stage"
-    },
-    {
-      name: "Lilit Cafe",
-      description: "Casual spot with gluten-free eats",
-      lat: 38.989489486966136,
-      lng: -77.10063630182091,
-      category: ["dining"],
-      link: "https://www.google.com/maps?q=Lilit+Cafe"
-    }
-  ];
-
-  const allMarkers = [];
-
-  function addMarkers(category) {
-    // Clear old markers
-    while (allMarkers.length) allMarkers.pop().remove();
-
-    // Add matching markers
-    pois.forEach(poi => {
-      const categories = Array.isArray(poi.category) ? poi.category : [poi.category];
-      if (category === "all" || categories.includes(category)) {
-        const marker = new mapboxgl.Marker({ color: "#2b6cb0" })
-          .setLngLat([poi.lng, poi.lat])
-          .setPopup(
-            new mapboxgl.Popup().setHTML(`
-              <strong>${poi.name}</strong><br>
-              ${poi.description}<br>
-              <a href="${poi.link}" target="_blank">Get directions</a>
-            `)
-          )
-          .addTo(map);
-        allMarkers.push(marker);
-      }
-    });
-  }
-
-  // Show all on load
-  map.on('load', () => {
-    addMarkers('all');
-  });
-
-  // Called on button click
-  function filterMarkers(category) {
-    addMarkers(category);
-  }
-
-  // Near Me Button Logic
-  function locateUser() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(position => {
-        const userCoords = [position.coords.longitude, position.coords.latitude];
-        map.flyTo({ center: userCoords, zoom: 15 });
-
-        new mapboxgl.Marker({ color: '#d32f2f' })
-          .setLngLat(userCoords)
-          .setPopup(new mapboxgl.Popup().setHTML("📍 You are here"))
-          .addTo(map);
-      }, () => {
-        alert('Unable to retrieve your location.');
-      });
-    } else {
-      alert('Geolocation is not supported by your browser.');
-    }
-  }
-</script>
-
-<!-- Add these buttons near your map div -->
-<div style="position: absolute; top: 10px; right: 10px; z-index: 1; display: flex; flex-direction: column; gap: 8px;">
-  <button onclick="filterMarkers('all')" style="background:#2b6cb0;color:white;padding:8px;border:none;border-radius:4px;">All</button>
-  <button onclick="filterMarkers('dining')" style="background:#2b6cb0;color:white;padding:8px;border:none;border-radius:4px;">Dining</button>
-  <button onclick="filterMarkers('shopping')" style="background:#2b6cb0;color:white;padding:8px;border:none;border-radius:4px;">Shopping</button>
-  <button onclick="filterMarkers('arts')" style="background:#2b6cb0;color:white;padding:8px;border:none;border-radius:4px;">Arts</button>
-  <button onclick="locateUser()" style="background:#2b6cb0;color:white;padding:8px;border:none;border-radius:4px;">Near Me</button>
-</div>
+  <!-- Your full script goes here -->
+  <script>
+    // (script you posted earlier)
+  </script>
+</body>
