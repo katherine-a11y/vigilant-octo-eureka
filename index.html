@@ -4,6 +4,8 @@
   <meta charset="utf-8" />
   <title>Discover Bethesda Map</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://cdn.jsdelivr.net/npm/mapbox-gl@3.0.1/dist/mapbox-gl.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/mapbox-gl@3.0.1/dist/mapbox-gl.js"></script>
   <style>
     html, body {
       margin: 0;
@@ -14,96 +16,96 @@
       height: 100vh;
       max-height: 600px;
     }
+    .filter-buttons {
+      padding: 12px;
+      text-align: center;
+    }
+    .filter-buttons button {
+      margin: 0 5px;
+      padding: 6px 12px;
+      font-size: 14px;
+    }
   </style>
-  <link href="https://cdn.jsdelivr.net/npm/mapbox-gl@3.0.1/dist/mapbox-gl.css" rel="stylesheet" />
-  <script src="https://cdn.jsdelivr.net/npm/mapbox-gl@3.0.1/dist/mapbox-gl.js"></script>
 </head>
 <body>
 
-<!-- 🔹 Filter buttons -->
-<div style="padding: 12px; text-align: center;">
-  <button onclick="filterMarkers('all')">All</button>
-  <button onclick="filterMarkers('dining')">Dining</button>
-  <button onclick="filterMarkers('arts')">Arts</button>
-</div>
+  <div id="map"></div>
 
-<!-- 🔹 Map container -->
-<div id="map"></div>
+  <div class="filter-buttons">
+    <button onclick="filterMarkers('all')">All</button>
+    <button onclick="filterMarkers('dining')">Dining</button>
+    <button onclick="filterMarkers('arts')">Arts</button>
+  </div>
 
-<!-- 🔹 Script to load Mapbox and markers -->
-<script>
-  mapboxgl.accessToken = 'pk.eyJ1Ijoia2NsYXJrOSIsImEiOiJjbWRzZXl1d3UwcTA0MnRvZzJmMTU2N2hoIn0.qB9Oslwgj7vvNbXFWWgfnQ';
+  <script>
+    mapboxgl.accessToken = 'pk.eyJ1Ijoia2NsYXJrOSIsImEiOiJjbWRzZXl1d3UwcTA0MnRvZzJmMTU2N2hoIn0.qB9Oslwgj7vvNbXFWWgfnQ';
 
-  const map = new mapboxgl.Map({
-    container: 'map',
-    style: 'mapbox://styles/kclark9/cmdsilo3h002101p6he6f4jvo',
-    center: [-77.0940, 38.9842],
-    zoom: 15
-  });
-
- const pois = [
-  {
-    name: "Bethesda Row",
-    description: "Dining + shopping destination",
-    lat: 38.9806,
-    lng: -77.0955,
-    category: "dining",
-    link: "https://www.google.com/maps/dir/?api=1&destination=38.9806,-77.0955"
-  },
-  {
-    name: "Imagination Stage",
-    description: "Children’s theater & classes",
-    lat: 38.9829,
-    lng: -77.0961,
-    category: "arts",
-    link: "https://www.google.com/maps/dir/?api=1&destination=38.9829,-77.0961"
-  },
-  {
-    name: "Lilit Cafe & Beer & Wine Store",
-    description: "Gluten‑free cafe & beer & wine store",
-    lat: 38.9885,
-    lng: -77.10046,
-    category: "dining",
-    link: "https://www.google.com/maps/dir/?api=1&destination=38.9885,-77.10046"
-  }
-];
-
-  }
-];
-
-
-  const allMarkers = [];
-
-  function addMarkers(category) {
-    // Clear old markers
-    while (allMarkers.length) allMarkers.pop().remove();
-
-    // Add matching markers
-    pois.forEach(poi => {
-      if (category === "all" || poi.category === category) {
-        const marker = new mapboxgl.Marker({ color: "#2b6cb0" })
-          .setLngLat([poi.lng, poi.lat])
-          .setPopup(
-            new mapboxgl.Popup().setHTML(`
-              <strong>${poi.name}</strong><br>
-              ${poi.description}<br>
-              <a href="${poi.link}" target="_blank">Get directions</a>
-            `)
-          )
-          .addTo(map);
-        allMarkers.push(marker);
-      }
+    const map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/kclark9/cmdsilo3h002101p6he6f4jvo',
+      center: [-77.0940, 38.9842],
+      zoom: 15
     });
-  }
 
-  map.on('load', () => {
-    addMarkers('all');
-  });
+    const pois = [
+      {
+        name: "Bethesda Row",
+        description: "Dining + shopping destination",
+        lat: 38.9824,
+        lng: -77.0941,
+        category: "dining",
+        address: "4827 Bethesda Ave, Bethesda, MD 20814"
+      },
+      {
+        name: "Imagination Stage",
+        description: "Children’s theater and classes",
+        lat: 38.9817,
+        lng: -77.0956,
+        category: "arts",
+        address: "4908 Auburn Ave, Bethesda, MD 20814"
+      },
+      {
+        name: "Lilit Cafe",
+        description: "Casual spot with gluten-free eats",
+        lat: 38.9877,
+        lng: -77.0943,
+        category: "dining",
+        address: "7921 Old Georgetown Rd, Bethesda, MD 20814"
+      }
+    ];
 
-  function filterMarkers(category) {
-    addMarkers(category);
-  }
-</script>
+    const allMarkers = [];
+
+    function addMarkers(category) {
+      while (allMarkers.length) allMarkers.pop().remove();
+
+      pois.forEach(poi => {
+        if (category === "all" || poi.category === category) {
+          const marker = new mapboxgl.Marker({ color: "#2b6cb0" })
+            .setLngLat([poi.lng, poi.lat])
+            .setPopup(
+              new mapboxgl.Popup().setHTML(`
+                <strong>${poi.name}</strong><br>
+                ${poi.description}<br>
+                <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(poi.address)}" target="_blank">
+                  Get directions
+                </a>
+              `)
+            )
+            .addTo(map);
+          allMarkers.push(marker);
+        }
+      });
+    }
+
+    map.on('load', () => {
+      addMarkers('all');
+    });
+
+    function filterMarkers(category) {
+      addMarkers(category);
+    }
+  </script>
 
 </body>
 </html>
