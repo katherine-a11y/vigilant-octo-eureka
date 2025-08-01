@@ -124,9 +124,13 @@
       });
     }
 
-    function filterMarkers(category) {
-      addMarkers(category);
-    }
+ function filterMarkers(category) {
+  addMarkers(category);
+  map.easeTo({
+    center: [-77.0940, 38.9842],
+    zoom: 14
+  });
+}
 
     function locateUser() {
       if (navigator.geolocation) {
