@@ -31,10 +31,44 @@
     zoom: 15
   });
 
-  new mapboxgl.Marker({ color: "#D91E18" })
-    .setLngLat([-77.0940, 38.9842])
-    .setPopup(new mapboxgl.Popup().setText("Downtown Bethesda"))
+ const pois = [
+  {
+    name: "Bethesda Row",
+    description: "Dining + shopping destination",
+    lat: 38.9823,
+    lng: -77.0947,
+    link: "https://maps.app.goo.gl/ZkL5KwH9F7MgdhXR7"
+  },
+  {
+    name: "Imagination Stage",
+    description: "Children’s theater and classes",
+    lat: 38.9829,
+    lng: -77.0961,
+    link: "https://imaginationstage.org"
+  },
+  {
+    name: "Lilit Cafe",
+    description: "Casual spot with gluten-free eats",
+    lat: 38.9848,
+    lng: -77.0942,
+    link: "https://maps.app.goo.gl/pMXptjZYZDNiyYhd9"
+  }
+];
+
+// Add markers
+pois.forEach(poi => {
+  const marker = new mapboxgl.Marker({ color: "#2b6cb0" })
+    .setLngLat([poi.lng, poi.lat])
+    .setPopup(
+      new mapboxgl.Popup().setHTML(`
+        <strong>${poi.name}</strong><br>
+        ${poi.description}<br>
+        <a href="${poi.link}" target="_blank">Get directions</a>
+      `)
+    )
     .addTo(map);
+});
+
 </script>
 
 </body>
