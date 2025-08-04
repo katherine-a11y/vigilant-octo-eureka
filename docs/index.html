@@ -119,11 +119,15 @@
   <script>
     mapboxgl.accessToken = 'pk.eyJ1Ijoia2NsYXJrOSIsImEiOiJjbWRzZXl1d3UwcTA0MnRvZzJmMTU2N2hoIn0.qB9Oslwgj7vvNbXFWWgfnQ';
 
-    const map = new mapboxgl.Map({
-      container: 'map',
-      style: 'mapbox://styles/kclark9/cmdsilo3h002101p6he6f4jvo',
-      center: [-77.0940, 38.9842],
-      zoom: 15
+const allMarkers = []; // ✅ This goes here, outside of the map constructor
+
+const map = new mapboxgl.Map({
+  container: 'map',
+  style: 'mapbox://styles/kclark9/cmdsilo3h002101p6he6f4jvo',
+  center: [-77.0940, 38.9842],
+  zoom: 15
+});
+
     });
 
     const pois = [
@@ -222,13 +226,15 @@
 }
 
 
-    function filterMarkers(category) {
-      addMarkers(category);
-      map.easeTo({
-        center: [-77.0940, 38.9842],
-        zoom: 14
-      });
-    }
+  function filterMarkers(category) {
+  addMarkers(category);
+  map.easeTo({
+    center: [-77.0940, 38.9842],
+    zoom: 14
+  });
+  document.getElementById('map-hint')?.remove();
+}
+
 
     function locateUser() {
       if (navigator.geolocation) {
