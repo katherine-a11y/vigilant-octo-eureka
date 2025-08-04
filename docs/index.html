@@ -233,30 +233,33 @@
   }
 
   function locateUser() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(position => {
-        const userCoords = [position.coords.longitude, position.coords.latitude];
-        map.flyTo({ center: userCoords, zoom: 15 });
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(position => {
+      const userCoords = [position.coords.longitude, position.coords.latitude];
+      map.flyTo({ center: userCoords, zoom: 15 });
 
-        new mapboxgl.Marker({
-          element: (() => {
-            const el = document.createElement('div');
-            el.textContent = '📍';
-            el.style.fontSize = '24px';
-            el.style.lineHeight = '1';
-            return el;
-          })()
-        })
-          .setLngLat(userCoords)
-          .setPopup(new mapboxgl.Popup().setText("You are here"))
-          .addTo(map);
-      }, () => {
-        alert('Unable to retrieve your location.');
-      });
-    } else {
-      alert('Geolocation is not supported by your browser.');
-    }
+      // custom “you are here” marker (blue circle with white border and glow)
+      const userEl = document.createElement('div');
+      userEl.style.width = '26px';
+      userEl.style.height = '26px';
+      userEl.style.border = '3px solid white';
+      userEl.style.borderRadius = '50%';
+      userEl.style.boxShadow = '0 0 10px rgba(0,123,255,0.8)';
+      userEl.style.backgroundColor = '#007bff'; // blue
+      userEl.style.cursor = 'pointer';
+
+      new mapboxgl.Marker({ element: userEl })
+        .setLngLat(userCoords)
+        .setPopup(new mapboxgl.Popup().setText("You are here"))
+        .addTo(map);
+    }, () => {
+      alert('Unable to retrieve your location.');
+    });
+  } else {
+    alert('Geolocation is not supported by your browser.');
   }
+}
+
 
   map.on('load', () => {
     // Start blank – user will activate filters
