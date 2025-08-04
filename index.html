@@ -103,25 +103,34 @@
 
     const allMarkers = [];
 
-    function addMarkers(category) {
-      while (allMarkers.length) allMarkers.pop().remove();
+fetch('businesses_updated.json')
+  .then(res => res.json())
+  .then(pois => {
+    pois.forEach(poi => {
+      const el = document.createElement('div');
+      el.className = 'custom-marker';
 
-      pois.forEach(poi => {
-        const categories = Array.isArray(poi.category) ? poi.category : [poi.category];
-        if (category === "all" || categories.includes(category)) {
-          const marker = new mapboxgl.Marker({ color: "#2b6cb0" })
-            .setLngLat([poi.lng, poi.lat])
-            .setPopup(
-              new mapboxgl.Popup().setHTML(`
-                <strong>${poi.name}</strong><br>
-                ${poi.description}<br>
-                <a href="${poi.link}" target="_blank">Get directions</a>
-              `)
-            )
-            .addTo(map);
-          allMarkers.push(marker);
-        }
+      const icon = lucide.createElement(poi.icon || 'map-pin', {
+        size: 20,
+        color: '#2A2A2A',
+        strokeWidth: 2
       });
+      el.appendChild(icon);
+
+      const marker = new mapboxgl.Marker(el)
+        .setLngLat([poi.longitude, poi.latitude])
+        .setPopup(
+          new mapboxgl.Popup().setHTML(`
+            <strong>${poi.name}</strong><br>
+            <small>${poi.category || ''}</small>
+          `)
+        )
+        .addTo(map);
+
+      allMarkers.push(marker);
+    });
+  });
+
     }
 
  function filterMarkers(category) {
