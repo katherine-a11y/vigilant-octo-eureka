@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Discover Bethesda Map</title>
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet" />
+  <style>
+    body { margin: 0; padding: 0; }
+    #map { position: absolute; top: 40px; bottom: 0; width: 100%; }
+    #search {
+      position: absolute;
+      top: 5px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1;
+      background: white;
+      padding: 6px 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      width: 250px;
+    }
+  </style>
+</head>
+<body>
+
+<input type="text" id="search" placeholder="Search for a business..." />
+
+<div id="map"></div>
+
+<script>
+  mapboxgl.accessToken = 'pk.eyJ1IjoiZGlzY292ZXJiZXRoZXNkYSIsImEiOiJja3Rwb2wwOGgwMXd5MnBwZ2liNjM2OGhpIn0.qzb0mJYlVWJFlvCTZ7UY8Q';
+
+  const map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/streets-v12',
+    center: [-77.0947, 38.9801],
+    zoom: 14
+  });
+
+  const colorMap = {
+    "Shopping": "#6366f1",
+    "Exercise": "#10b981",
+    "Wellness": "#f59e0b"
+  };
+
+  let markers = [];
+
+  fetch('businesses.json')
+    .then(response => response.json())
+    .then(data => {
+      data.forEach(business => {
+        const marker = new mapboxgl.Marker({ color: colorMap[business.category] || "#3b82f6" })
+          .setLngLat([business.longitude, business.latitude])
+          .setPopup(new mapboxgl.Popup().setText(business.name))
+          .addTo(map);
+
+        markers.push({ name: business.name.toLowerCase(), marker, lngLat: [business.longitude, business.latitude] });
+      });
+
+      // Add search functionality
+      document.getElementById('search').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+          const searchTerm = this.value.toLowerCase();
+          const result = markers.find(m => m.name.includes(searchTerm));
+          if (result) {
+            map.flyTo({ center: result.lngLat, zoom: 16 });
+            result.marker.togglePopup();
+          } else {
+            alert('No match found.');
+          }
+        }
+      });
+    });
+</script>
+
+</body>
+</html>
