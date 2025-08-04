@@ -1,72 +1,90 @@
-const pois = [
-  {
-    "name": "Wonderland Books",
-    "description": "Visit a Bookstore • Quiet Moments",
-    "lat": 38.9890797,
-    "lng": -77.0980395,
-    "category": "bookstore",
-    "link": "https://www.google.com/maps/search/?api=1&query=Wonderland+Books+Bethesda+MD"
-  },
-  {
-    "name": "Pink Moon",
-    "description": "Fitness • Child Care",
-    "lat": 38.9896194,
-    "lng": -77.0957016,
-    "category": "fitness",
-    "link": "https://www.google.com/maps/search/?api=1&query=Pink+Moon+Bethesda+MD"
-  },
-  {
-    "name": "SoulCycle",
-    "description": "Pilates & Cycling • Community Connection",
-    "lat": 38.982219,
-    "lng": -77.0974626,
-    "category": "fitness",
-    "link": "https://www.google.com/maps/search/?api=1&query=SoulCycle+Bethesda+MD"
-  },
-  {
-    "name": "Club Pilates",
-    "description": "Pilates & Cycling • Community Connection",
-    "lat": 38.9821934,
-    "lng": -77.0980688,
-    "category": "fitness",
-    "link": "https://www.google.com/maps/search/?api=1&query=Club+Pilates+Bethesda+MD"
-  },
-  {
-    "name": "Posh Nails",
-    "description": "Wellness • Quiet Moments",
-    "lat": 38.978257,
-    "lng": -77.0905313,
-    "category": "wellness",
-    "link": "https://www.google.com/maps/search/?api=1&query=Posh+Nails+Bethesda+MD"
-  },
-  {
-    "name": "The NOW Massage",
-    "description": "Wellness • Quiet Moments",
-    "lat": 38.9785021,
-    "lng": -77.0984441,
-    "category": "wellness",
-    "link": "https://www.google.com/maps/search/?api=1&query=The+NOW+Massage+Bethesda+MD"
-  },
-  {
-    "name": "Tea Spa",
-    "description": "Wellness • Quiet Moments",
-    "lat": 38.988656,
-    "lng": -77.0990975,
-    "category": "wellness",
-    "link": "https://www.google.com/maps/search/?api=1&query=Tea+Spa+Bethesda+MD"
-  },
-  {
-    "name": "The Red Bloom Wellness Spa",
-    "description": "Wellness • Quiet Moments",
-    "lat": 38.9824281,
-    "lng": -77.0983252,
-    "category": "wellness",
-    "link": "https://www.google.com/maps/search/?api=1&query=The+Red+Bloom+Wellness+Spa+Bethesda+MD"
-  }
-];
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Discover Bethesda</title>
+  <script src='https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js'></script>
+  <link href='https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css' rel='stylesheet' />
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+    }
+    #map {
+      position: absolute;
+      top: 0; bottom: 0; width: 100%;
+    }
+    .filter-menu {
+      position: absolute;
+      top: 30px;
+      left: 20px;
+      z-index: 2;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.15);
+      padding: 10px;
+      font-size: 16px;
+    }
+    .filter-menu h2 {
+      margin: 0 0 10px 0;
+      font-size: 18px;
+    }
+    .filter-button {
+      display: block;
+      margin: 6px 0;
+      padding: 6px 12px;
+      border: none;
+      background: #f5f5f5;
+      border-radius: 6px;
+      cursor: pointer;
+      width: 100%;
+      text-align: left;
+      font-size: 16px;
+    }
+    .filter-button:hover {
+      background-color: #e1e1e1;
+    }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+  <div class="filter-menu">
+    <h2>📍 Plan Your Day</h2>
+    <button class="filter-button" onclick="filterMarkers('quiet')">🧘‍♀️ Quiet Moments</button>
+    <button class="filter-button" onclick="filterMarkers('fitness')">🏋️ Pilates & Cycling</button>
+    <button class="filter-button" onclick="filterMarkers('wellness')">💅 Wellness & Self Care</button>
+    <button class="filter-button" onclick="filterMarkers('bookstore')">📚 Visit a Bookstore</button>
+  </div>
 
-// Remove auto-loading markers on map load
-document.addEventListener('DOMContentLoaded', () => {
-  // No addMarkers('all') here — markers will be added only after user selection
-  // Header is removed: "Ready to discover something new today"
-});
+  <script>
+    mapboxgl.accessToken = 'YOUR_MAPBOX_ACCESS_TOKEN';
+
+    const map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapbox/streets-v12',
+      center: [-77.098, 38.985],
+      zoom: 14
+    });
+
+    const pois = [
+      {
+        "name": "Wonderland Books",
+        "description": "Visit a Bookstore • Quiet Moments",
+        "lat": 38.9890797,
+        "lng": -77.0980395,
+        "category": "bookstore",
+        "link": "https://www.google.com/maps/search/?api=1&query=Wonderland+Books+Bethesda+MD"
+      },
+      {
+        "name": "Pink Moon",
+        "description": "Fitness • Child Care",
+        "lat": 38.9896194,
+        "lng": -77.0957016,
+        "category": "fitness",
+        "link": "https://www.google.com/maps/search/?api=1&query=Pink+Moon+Bethesda+MD"
+      },
+      {
+        "name": "SoulCycle",
+        "description": "Pilates & Cycling • Community Connection",
+        "lat": 38.982219,
