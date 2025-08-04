@@ -136,10 +136,17 @@
     }
 
     fetch('businesses_updated-2.json')
-      .then(res => res.json())
+      .then(res => {
+        if (!res.ok) throw new Error("Failed to load JSON");
+        return res.json();
+      })
       .then(data => {
         allPOIs = data;
         addMarkers('All');
+      })
+      .catch(error => {
+        console.error("Error loading JSON:", error);
+        alert("Could not load business data.");
       });
   </script>
 </body>
