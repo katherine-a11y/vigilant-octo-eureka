@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link href="https://cdn.jsdelivr.net/npm/mapbox-gl@3.0.1/dist/mapbox-gl.css" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/mapbox-gl@3.0.1/dist/mapbox-gl.js"></script>
-  <script src="https://unpkg.com/lucide@latest"></script>
   <style>
     html, body {
       margin: 0;
@@ -15,18 +14,15 @@
       font-family: sans-serif;
       overflow: hidden;
     }
-
     #map-container {
       position: relative;
       width: 100%;
       height: 100%;
     }
-
     #map {
       width: 100%;
       height: 100%;
     }
-
     .filter-buttons {
       position: absolute;
       top: 12px;
@@ -36,7 +32,6 @@
       flex-direction: column;
       gap: 8px;
     }
-
     .filter-buttons button {
       padding: 8px 12px;
       background-color: #2b6cb0;
@@ -47,7 +42,6 @@
       cursor: pointer;
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
     }
-
     .filter-buttons button:hover {
       background-color: #1e4e8c;
     }
@@ -72,41 +66,89 @@
       container: 'map',
       style: 'mapbox://styles/kclark9/cmdsilo3h002101p6he6f4jvo',
       center: [-77.0940, 38.9842],
-      zoom: 15
+      zoom: 14
     });
 
     const allMarkers = [];
-    let allPOIs = [];
 
-    function addMarkers(category) {
+    const businessData = [
+      {
+        "name": "Wonderland Books",
+        "latitude": 38.9890797,
+        "longitude": -77.0980395,
+        "icon": "📚",
+        "category": "Shopping"
+      },
+      {
+        "name": "Pink Moon",
+        "latitude": 38.9896194,
+        "longitude": -77.0957016,
+        "icon": "👶",
+        "category": "Exercise"
+      },
+      {
+        "name": "SoulCycle",
+        "latitude": 38.982219,
+        "longitude": -77.0974626,
+        "icon": "🚴",
+        "category": "Exercise"
+      },
+      {
+        "name": "Club Pilates",
+        "latitude": 38.9821934,
+        "longitude": -77.0980688,
+        "icon": "🏋️",
+        "category": "Exercise"
+      },
+      {
+        "name": "PoshNails",
+        "latitude": 38.978257,
+        "longitude": -77.0905313,
+        "icon": "💅",
+        "category": "Wellness"
+      },
+      {
+        "name": "The NOW Massage",
+        "latitude": 38.9785021,
+        "longitude": -77.0984441,
+        "icon": "💆",
+        "category": "Wellness"
+      },
+      {
+        "name": "Tea Spa",
+        "latitude": 38.988656,
+        "longitude": -77.0990975,
+        "icon": "🫖",
+        "category": "Wellness"
+      },
+      {
+        "name": "The Red Bloom Wellness Spa",
+        "latitude": 38.9824281,
+        "longitude": -77.0983252,
+        "icon": "🌺",
+        "category": "Wellness"
+      }
+    ];
+
+    function addMarkers(filter = 'All') {
+      // Remove existing markers
       allMarkers.forEach(marker => marker.remove());
       allMarkers.length = 0;
 
-      allPOIs
-        .filter(poi => category === 'All' || poi.category === category)
-        .forEach(poi => {
+      businessData.forEach(business => {
+        if (filter === 'All' || business.category === filter) {
           const el = document.createElement('div');
-          el.className = 'custom-marker';
-
-          const icon = lucide.createElement(poi.icon || 'map-pin', {
-            size: 20,
-            color: '#2A2A2A',
-            strokeWidth: 2
-          });
-          el.appendChild(icon);
+          el.textContent = business.icon || '📍';
+          el.style.fontSize = '20px';
 
           const marker = new mapboxgl.Marker(el)
-            .setLngLat([poi.longitude, poi.latitude])
-            .setPopup(
-              new mapboxgl.Popup().setHTML(`
-                <strong>${poi.name}</strong><br>
-                <small>${poi.category || ''}</small>
-              `)
-            )
+            .setLngLat([business.longitude, business.latitude])
+            .setPopup(new mapboxgl.Popup().setHTML(`<strong>${business.name}</strong><br><small>${business.category}</small>`))
             .addTo(map);
 
           allMarkers.push(marker);
-        });
+        }
+      });
     }
 
     function filterMarkers(category) {
@@ -135,19 +177,9 @@
       }
     }
 
-    fetch('businesses_updated-2.json')
-      .then(res => {
-        if (!res.ok) throw new Error("Failed to load JSON");
-        return res.json();
-      })
-      .then(data => {
-        allPOIs = data;
-        addMarkers('All');
-      })
-      .catch(error => {
-        console.error("Error loading JSON:", error);
-        alert("Could not load business data.");
-      });
+    map.on('load', () => {
+      addMarkers();
+    });
   </script>
 </body>
 </html>
