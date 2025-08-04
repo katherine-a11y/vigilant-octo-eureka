@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link href="https://cdn.jsdelivr.net/npm/mapbox-gl@3.0.1/dist/mapbox-gl.css" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/mapbox-gl@3.0.1/dist/mapbox-gl.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
   <style>
     html, body {
       margin: 0;
@@ -69,90 +70,47 @@
       zoom: 14
     });
 
-    const allMarkers = [];
+    let allMarkers = [];
 
-    const businessData = [
-      {
-        "name": "Wonderland Books",
-        "latitude": 38.9890797,
-        "longitude": -77.0980395,
-        "icon": "📚",
-        "category": "Shopping"
-      },
-      {
-        "name": "Pink Moon",
-        "latitude": 38.9896194,
-        "longitude": -77.0957016,
-        "icon": "👶",
-        "category": "Exercise"
-      },
-      {
-        "name": "SoulCycle",
-        "latitude": 38.982219,
-        "longitude": -77.0974626,
-        "icon": "🚴",
-        "category": "Exercise"
-      },
-      {
-        "name": "Club Pilates",
-        "latitude": 38.9821934,
-        "longitude": -77.0980688,
-        "icon": "🏋️",
-        "category": "Exercise"
-      },
-      {
-        "name": "PoshNails",
-        "latitude": 38.978257,
-        "longitude": -77.0905313,
-        "icon": "💅",
-        "category": "Wellness"
-      },
-      {
-        "name": "The NOW Massage",
-        "latitude": 38.9785021,
-        "longitude": -77.0984441,
-        "icon": "💆",
-        "category": "Wellness"
-      },
-      {
-        "name": "Tea Spa",
-        "latitude": 38.988656,
-        "longitude": -77.0990975,
-        "icon": "🫖",
-        "category": "Wellness"
-      },
-      {
-        "name": "The Red Bloom Wellness Spa",
-        "latitude": 38.9824281,
-        "longitude": -77.0983252,
-        "icon": "🌺",
-        "category": "Wellness"
-      }
-    ];
+    function clearMarkers() {
+      allMarkers.forEach(obj => obj.marker.remove());
+      allMarkers = [];
+    }
 
-    function addMarkers(filter = 'All') {
-      // Remove existing markers
-      allMarkers.forEach(marker => marker.remove());
-      allMarkers.length = 0;
+    function loadMarkers(categoryFilter = 'All') {
+      clearMarkers();
 
-      businessData.forEach(business => {
-        if (filter === 'All' || business.category === filter) {
-          const el = document.createElement('div');
-          el.textContent = business.icon || '📍';
-          el.style.fontSize = '20px';
+      fetch('businesses_updated-2.json')
+        .then(res => res.json())
+        .then(pois => {
+          pois.forEach(poi => {
+            if (categoryFilter !== 'All' && poi.category !== categoryFilter) return;
 
-          const marker = new mapboxgl.Marker(el)
-            .setLngLat([business.longitude, business.latitude])
-            .setPopup(new mapboxgl.Popup().setHTML(`<strong>${business.name}</strong><br><small>${business.category}</small>`))
-            .addTo(map);
+            const el = document.createElement('div');
+            const iconSVG = lucide.createElement(poi.icon || 'map-pin', {
+              size: 24,
+              color: '#2A2A2A',
+              strokeWidth: 2
+            });
+            el.appendChild(iconSVG);
 
-          allMarkers.push(marker);
-        }
-      });
+            const marker = new mapboxgl.Marker(el)
+              .setLngLat([poi.longitude, poi.latitude])
+              .setPopup(
+                new mapboxgl.Popup().setHTML(`
+                  <strong>${poi.name}</strong><br>
+                  <small>${poi.category || ''}</small>
+                `)
+              )
+              .addTo(map);
+
+            allMarkers.push({ marker, category: poi.category });
+          });
+        });
     }
 
     function filterMarkers(category) {
-      addMarkers(category);
+      loadMarkers(category);
       map.easeTo({
         center: [-77.0940, 38.9842],
         zoom: 14
@@ -178,7 +136,7 @@
     }
 
     map.on('load', () => {
-      addMarkers();
+      loadMarkers('All');
     });
   </script>
 </body>
