@@ -74,32 +74,34 @@
       zoom: 15
     });
 
-    const pois = [
-      {
-        name: "Bethesda Row",
-        description: "Dining + Shopping destination",
-        lat: 38.9823,
-        lng: -77.0947,
-        category: ["dining", "shopping"],
-        link: "https://www.google.com/maps/search/?api=1&query=Bethesda+Row+Bethesda+MD"
-      },
-      {
-        name: "Imagination Stage",
-        description: "Children’s theater and classes",
-        lat: 38.98994383474525,
-        lng: -77.09983109366554,
-        category: ["arts"],
-        link: "https://www.google.com/maps/search/?api=1&query=Imagination+Stage+Bethesda+MD"
-      },
-      {
-        name: "Lilit Cafe",
-        description: "Casual spot with gluten-free eats",
-        lat: 38.989489486966136,
-        lng: -77.10063630182091,
-        category: ["dining"],
-        link: "https://www.google.com/maps/search/?api=1&query=Lilit+Cafe+Bethesda+MD"
-      }
-    ];
+    fetch('businesses_updated.json')
+  .then(res => res.json())
+  .then(pois => {
+    pois.forEach(poi => {
+      const el = document.createElement('div');
+      el.className = 'custom-marker';
+
+      const icon = lucide.createElement(poi.icon || 'map-pin', {
+        size: 20,
+        color: '#2A2A2A',
+        strokeWidth: 2
+      });
+      el.appendChild(icon);
+
+      const marker = new mapboxgl.Marker(el)
+        .setLngLat([poi.longitude, poi.latitude])
+        .setPopup(
+          new mapboxgl.Popup().setHTML(`
+            <strong>${poi.name}</strong><br>
+            <small>${poi.category || ''}</small>
+          `)
+        )
+        .addTo(map);
+
+      allMarkers.push(marker);
+    });
+  });
+
 
     const allMarkers = [];
 
