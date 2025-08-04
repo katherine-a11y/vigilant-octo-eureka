@@ -1,0 +1,961 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.0978453,
+          38.989158
+        ]
+      },
+      "properties": {
+        "name": "Wonderland Books",
+        "description": "Books & Comics",
+        "category": "Books & Comics",
+        "address": "7920 Norfolk Avenue",
+        "phone": NaN,
+        "district": "Bethesda Row / Downtown Core",
+        "tier": 3,
+        "visitorCategory": [],
+        "residentCategory": []
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.0974282,
+          38.9901977
+        ]
+      },
+      "properties": {
+        "name": "Woodmont Cleaners",
+        "description": "Dry Cleaners & Tailoring",
+        "category": "Dry Cleaners & Tailoring",
+        "address": "4849 Cordell Avenue",
+        "phone": "(301) 664-6474",
+        "district": "Other",
+        "tier": 3,
+        "visitorCategory": [],
+        "residentCategory": []
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.0969078,
+          38.9924286
+        ]
+      },
+      "properties": {
+        "name": "Woodmont Market Beer & Wine",
+        "description": "Beverages & Tobacco",
+        "category": "Beverages & Tobacco",
+        "address": "8227 Woodmont Avenue",
+        "phone": "(301) 986-4933",
+        "district": "Woodmont Avenue Strip",
+        "tier": 3,
+        "visitorCategory": [],
+        "residentCategory": []
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.0988328,
+          38.9878963
+        ]
+      },
+      "properties": {
+        "name": "Woodmont Sports",
+        "description": "Sporting Goods & Apparel",
+        "category": "Sporting Goods & Apparel",
+        "address": "7813 Old Georgetown Road",
+        "phone": "(301) 500-1015",
+        "district": "Old Georgetown Road Corridor",
+        "tier": 3,
+        "visitorCategory": [],
+        "residentCategory": []
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.0906,
+          38.97933
+        ]
+      },
+      "properties": {
+        "name": "The Writer's Center",
+        "description": "Literary Center",
+        "category": "Literary Center",
+        "address": "4508 Walsh Street",
+        "phone": "(301) 654-8664",
+        "district": "Other",
+        "tier": 3,
+        "visitorCategory": [],
+        "residentCategory": []
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.0978088,
+          38.9815068
+        ]
+      },
+      "properties": {
+        "name": "Wylie Grey",
+        "description": "Clothing, Accessories & Shoes",
+        "category": "Clothing, Accessories & Shoes",
+        "address": "7125 Bethesda Lane",
+        "phone": "(301) 926-4775",
+        "district": "Other",
+        "tier": 2,
+        "visitorCategory": [
+          "Shopping"
+        ],
+        "residentCategory": []
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.0967506,
+          38.9881666
+        ]
+      },
+      "properties": {
+        "name": "Yong Studios",
+        "description": "Martial Arts Studios",
+        "category": "Martial Arts Studios",
+        "address": "4914 Fairmont Avenue",
+        "phone": "(301) 986-1002",
+        "district": "Other",
+        "tier": 3,
+        "visitorCategory": [],
+        "residentCategory": []
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.0938232,
+          38.9807984
+        ]
+      },
+      "properties": {
+        "name": "Zen Nails & Spa",
+        "description": "Day Spas, Nails & Tanning",
+        "category": "Day Spas, Nails & Tanning",
+        "address": "4710 Bethesda Avenue",
+        "phone": "(301) 907-6868",
+        "district": "Bethesda Row / Downtown Core",
+        "tier": 2,
+        "visitorCategory": [
+          "Wellness & Beauty"
+        ],
+        "residentCategory": [
+          "Healthcare"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.094487,
+          38.986071
+        ]
+      },
+      "properties": {
+        "name": "VKB Kitchen & Bath",
+        "description": "Home Improvement & Design",
+        "category": "Home Improvement & Design",
+        "address": "7613 Wisconsin Avenue, 2",
+        "phone": "(410) 290-9099",
+        "district": "Bethesda Row / Downtown Core",
+        "tier": 3,
+        "visitorCategory": [],
+        "residentCategory": []
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.0992711,
+          38.9789198
+        ]
+      },
+      "properties": {
+        "name": "Voorthuis Opticians",
+        "description": "Optical Goods",
+        "category": "Optical Goods",
+        "address": "6912 Arlington Road",
+        "phone": "(301) 718-9300",
+        "district": "Arlington Road District",
+        "tier": 3,
+        "visitorCategory": [],
+        "residentCategory": []
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.0967333,
+          38.9808168
+        ]
+      },
+      "properties": {
+        "name": "Vuori",
+        "description": "Clothing, Accessories & Shoes",
+        "category": "Clothing, Accessories & Shoes",
+        "address": "4820 Bethesda Avenue",
+        "phone": "(240) 858-4114",
+        "district": "Bethesda Row / Downtown Core",
+        "tier": 2,
+        "visitorCategory": [
+          "Shopping"
+        ],
+        "residentCategory": []
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.098841,
+          38.978118
+        ]
+      },
+      "properties": {
+        "name": "Wag N' Wash",
+        "description": "Pet Care & Supplies",
+        "category": "Pet Care & Supplies",
+        "address": "6900 Arlington Road",
+        "phone": "(240) 616-6266",
+        "district": "Arlington Road District",
+        "tier": 3,
+        "visitorCategory": [],
+        "residentCategory": []
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.099118,
+          38.9786667
+        ]
+      },
+      "properties": {
+        "name": "Walgreens",
+        "description": "Drug Stores & Pharmacies",
+        "category": "Drug Stores & Pharmacies",
+        "address": "6906 Arlington Road",
+        "phone": "(301) 841-0249",
+        "district": "Arlington Road District",
+        "tier": 3,
+        "visitorCategory": [],
+        "residentCategory": []
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.096653,
+          38.9810814
+        ]
+      },
+      "properties": {
+        "name": "Warby Parker",
+        "description": "Optical Goods",
+        "category": "Optical Goods",
+        "address": "4821 Bethesda Avenue",
+        "phone": "(240) 614-4317",
+        "district": "Bethesda Row / Downtown Core",
+        "tier": 3,
+        "visitorCategory": [],
+        "residentCategory": []
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.0936491,
+          38.9820253
+        ]
+      },
+      "properties": {
+        "name": "Washington Fine Properties",
+        "description": "Real Estate Agencies",
+        "category": "Real Estate Agencies",
+        "address": "7272 Wisconsin Avenue",
+        "phone": "(301) 222-0050",
+        "district": "Bethesda Row / Downtown Core",
+        "tier": 2,
+        "visitorCategory": [],
+        "residentCategory": [
+          "Financial Services"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.0929118,
+          38.9845218
+        ]
+      },
+      "properties": {
+        "name": "Waverly Street Gallery",
+        "description": "Art Galleries & Studios",
+        "category": "Art Galleries & Studios",
+        "address": "4600 East-West Highway",
+        "phone": "(301) 951-9441",
+        "district": "Other",
+        "tier": 3,
+        "visitorCategory": [],
+        "residentCategory": []
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.0963619,
+          38.9891169
+        ]
+      },
+      "properties": {
+        "name": "Weichert: Realtors",
+        "description": "Real Estate Agencies",
+        "category": "Real Estate Agencies",
+        "address": "7920 Woodmont Avenue",
+        "phone": "(301) 656-2500",
+        "district": "Woodmont Avenue Strip",
+        "tier": 2,
+        "visitorCategory": [],
+        "residentCategory": [
+          "Financial Services"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.0971609,
+          38.9937813
+        ]
+      },
+      "properties": {
+        "name": "Wells Fargo Bank",
+        "description": "Banking & Financial Services",
+        "category": "Banking & Financial Services",
+        "address": "8302 Woodmont Avenue",
+        "phone": "(240) 781-3013",
+        "district": "Woodmont Avenue Strip",
+        "tier": 2,
+        "visitorCategory": [],
+        "residentCategory": [
+          "Financial Services"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.0983211,
+          38.9821983
+        ]
+      },
+      "properties": {
+        "name": "Wells Fargo Bank",
+        "description": "Banking & Financial Services",
+        "category": "Banking & Financial Services",
+        "address": "4965 Elm Street",
+        "phone": "(301) 961-5210",
+        "district": "Other",
+        "tier": 2,
+        "visitorCategory": [],
+        "residentCategory": [
+          "Financial Services"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.0969039,
+          38.9807595
+        ]
+      },
+      "properties": {
+        "name": "Williams Sonoma",
+        "description": "Home Accessories & Specialty Gifts",
+        "category": "Home Accessories & Specialty Gifts",
+        "address": "4824 Bethesda Avenue",
+        "phone": "(301) 718-3071",
+        "district": "Bethesda Row / Downtown Core",
+        "tier": 3,
+        "visitorCategory": [],
+        "residentCategory": []
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.0949573,
+          38.9893886
+        ]
+      },
+      "properties": {
+        "name": "United Bank",
+        "description": "Banking & Financial Services",
+        "category": "Banking & Financial Services",
+        "address": "7845 Wisconsin Avenue",
+        "phone": "(301) 654-2757",
+        "district": "Bethesda Row / Downtown Core",
+        "tier": 2,
+        "visitorCategory": [],
+        "residentCategory": [
+          "Financial Services"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.097323,
+          38.990129
+        ]
+      },
+      "properties": {
+        "name": "Unity Dance and Movement",
+        "description": "Dance Studios",
+        "category": "Dance Studios",
+        "address": "4853 Cordell Avenue, Floor 16, Suite PH9",
+        "phone": "(202) 878-2282",
+        "district": "Other",
+        "tier": 3,
+        "visitorCategory": [],
+        "residentCategory": []
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.0977158,
+          38.9825142
+        ]
+      },
+      "properties": {
+        "name": "The UPS Store",
+        "description": "Mailing, Office Supplies & Storage",
+        "category": "Mailing, Office Supplies & Storage",
+        "address": "4938 Hampden Lane",
+        "phone": "(301) 951-9599",
+        "district": "Other",
+        "tier": 3,
+        "visitorCategory": [],
+        "residentCategory": []
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.0979442,
+          38.9881716
+        ]
+      },
+      "properties": {
+        "name": "Upstairs Art Studios",
+        "description": "Art Galleries & Studios",
+        "category": "Art Galleries & Studios",
+        "address": "4948 St. Elmo Avenue",
+        "phone": "(301) 442-6402",
+        "district": "Other",
+        "tier": 3,
+        "visitorCategory": [],
+        "residentCategory": []
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.0968148,
+          38.9902786
+        ]
+      },
+      "properties": {
+        "name": "Urban Boxing Bethesda",
+        "description": "Exercise & Health",
+        "category": "Exercise & Health",
+        "address": "4834 Cordell Avenue",
+        "phone": "(301) 656-2186",
+        "district": "Other",
+        "tier": 3,
+        "visitorCategory": [],
+        "residentCategory": []
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.0983298,
+          38.9811654
+        ]
+      },
+      "properties": {
+        "name": "Urban Country",
+        "description": "Furniture, Carpets & Flooring",
+        "category": "Furniture, Carpets & Flooring",
+        "address": "7121 Arlington Road",
+        "phone": "(301) 654-0500",
+        "district": "Arlington Road District",
+        "tier": 3,
+        "visitorCategory": [],
+        "residentCategory": []
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.099768,
+          38.990311
+        ]
+      },
+      "properties": {
+        "name": "V Nails",
+        "description": "Day Spas, Nails & Tanning",
+        "category": "Day Spas, Nails & Tanning",
+        "address": "8100 Norfolk Avenue",
+        "phone": "(240) 802-2249",
+        "district": "Bethesda Row / Downtown Core",
+        "tier": 2,
+        "visitorCategory": [
+          "Wellness & Beauty"
+        ],
+        "residentCategory": [
+          "Healthcare"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.0926927,
+          38.9841432
+        ]
+      },
+      "properties": {
+        "name": "Vamoose",
+        "description": "Transportation & Travel",
+        "category": "Transportation & Travel",
+        "address": "7401 Waverly Street",
+        "phone": "(301) 718-0036",
+        "district": "Other",
+        "tier": 3,
+        "visitorCategory": [],
+        "residentCategory": []
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.0918466,
+          38.9788858
+        ]
+      },
+      "properties": {
+        "name": "Verizon Wireless",
+        "description": "Wireless & Computers",
+        "category": "Wireless & Computers",
+        "address": "6932 Wisconsin Avenue",
+        "phone": "(301) 657-3240",
+        "district": "Bethesda Row / Downtown Core",
+        "tier": 3,
+        "visitorCategory": [],
+        "residentCategory": []
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.0974626,
+          38.9807347
+        ]
+      },
+      "properties": {
+        "name": "Veronica Beard",
+        "description": "Clothing, Accessories & Shoes",
+        "category": "Clothing, Accessories & Shoes",
+        "address": "4840 Bethesda Avenue",
+        "phone": "(240) 425-4808",
+        "district": "Bethesda Row / Downtown Core",
+        "tier": 2,
+        "visitorCategory": [
+          "Shopping"
+        ],
+        "residentCategory": []
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.0917503,
+          38.9796139
+        ]
+      },
+      "properties": {
+        "name": "Victor Gallery",
+        "description": "Furniture, Carpets & Flooring",
+        "category": "Furniture, Carpets & Flooring",
+        "address": "7034 Wisconsin Avenue",
+        "phone": "(301) 232-9189",
+        "district": "Bethesda Row / Downtown Core",
+        "tier": 3,
+        "visitorCategory": [],
+        "residentCategory": []
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.0948593,
+          38.991029
+        ]
+      },
+      "properties": {
+        "name": "The Violin House of Weaver",
+        "description": "Music Studios & Stores",
+        "category": "Music Studios & Stores",
+        "address": "4706 Highland Avenue",
+        "phone": "(301) 654-2239",
+        "district": "Other",
+        "tier": 3,
+        "visitorCategory": [],
+        "residentCategory": []
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.0917328,
+          38.9795796
+        ]
+      },
+      "properties": {
+        "name": "Town Jewelers",
+        "description": "Jewelry",
+        "category": "Jewelry",
+        "address": "7028 Wisconsin Avenue",
+        "phone": "(301) 656-8867",
+        "district": "Bethesda Row / Downtown Core",
+        "tier": 2,
+        "visitorCategory": [
+          "Shopping"
+        ],
+        "residentCategory": []
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.0907949,
+          38.9784041
+        ]
+      },
+      "properties": {
+        "name": "Trader Joe's",
+        "description": "Groceries & Markets",
+        "category": "Groceries & Markets",
+        "address": "6831 Wisconsin Avenue",
+        "phone": "(301) 907-0982",
+        "district": "Bethesda Row / Downtown Core",
+        "tier": 3,
+        "visitorCategory": [],
+        "residentCategory": []
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.0957571,
+          38.989994
+        ]
+      },
+      "properties": {
+        "name": "Trader Joe's",
+        "description": "Groceries & Markets",
+        "category": "Groceries & Markets",
+        "address": "7900 Wisconsin Avenue",
+        "phone": "(301) 215-7913",
+        "district": "Bethesda Row / Downtown Core",
+        "tier": 3,
+        "visitorCategory": [],
+        "residentCategory": []
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.0971195,
+          38.9825985
+        ]
+      },
+      "properties": {
+        "name": "Training Ground",
+        "description": "Exercise & Health",
+        "category": "Exercise & Health",
+        "address": "4940 Hampden Lane Suite 200",
+        "phone": "(240) 731-5003",
+        "district": "Other",
+        "tier": 3,
+        "visitorCategory": [],
+        "residentCategory": []
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.0981378,
+          38.9882444
+        ]
+      },
+      "properties": {
+        "name": "Tran's Barber Shop",
+        "description": "Hair Salons & Barber Shops",
+        "category": "Hair Salons & Barber Shops",
+        "address": "4951 St. Elmo Avenue",
+        "phone": "(301) 215-7271",
+        "district": "Other",
+        "tier": 2,
+        "visitorCategory": [
+          "Dining & Entertainment"
+        ],
+        "residentCategory": []
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.097707,
+          38.9869359
+        ]
+      },
+      "properties": {
+        "name": "Triangle Art Studios",
+        "description": "Art Galleries & Studios",
+        "category": "Art Galleries & Studios",
+        "address": "7711 Old Georgetown Road",
+        "phone": "(301) 215-6660",
+        "district": "Old Georgetown Road Corridor",
+        "tier": 3,
+        "visitorCategory": [],
+        "residentCategory": []
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.0924356,
+          38.9814394
+        ]
+      },
+      "properties": {
+        "name": "Tripper Bus",
+        "description": "Transportation & Travel",
+        "category": "Transportation & Travel",
+        "address": "4681 Willow Lane",
+        "phone": "(781) 834-9214",
+        "district": "Other",
+        "tier": 3,
+        "visitorCategory": [],
+        "residentCategory": []
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.092728,
+          38.9815579
+        ]
+      },
+      "properties": {
+        "name": "Truist",
+        "description": "Banking & Financial Services",
+        "category": "Banking & Financial Services",
+        "address": "7220 Wisconsin Avenue",
+        "phone": "(301) 656-5300",
+        "district": "Bethesda Row / Downtown Core",
+        "tier": 2,
+        "visitorCategory": [],
+        "residentCategory": [
+          "Financial Services"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.0963417,
+          38.9810773
+        ]
+      },
+      "properties": {
+        "name": "TTR Sotheby's International Realty",
+        "description": "Real Estate Agencies",
+        "category": "Real Estate Agencies",
+        "address": "4809 Bethesda Avenue",
+        "phone": "(301) 516-1212",
+        "district": "Bethesda Row / Downtown Core",
+        "tier": 2,
+        "visitorCategory": [],
+        "residentCategory": [
+          "Financial Services"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.0916512,
+          38.9784352
+        ]
+      },
+      "properties": {
+        "name": "U.S. Postal Service, Bethesda Post Office",
+        "description": "Mailing, Office Supplies & Storage",
+        "category": "Mailing, Office Supplies & Storage",
+        "address": "6900 Wisconsin Avenue, Suite 100",
+        "phone": "(301) 941-2665",
+        "district": "Bethesda Row / Downtown Core",
+        "tier": 3,
+        "visitorCategory": [],
+        "residentCategory": []
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.0953579,
+          38.9910282
+        ]
+      },
+      "properties": {
+        "name": "UBreakiFix Asurion",
+        "description": "Wireless & Computers",
+        "category": "Wireless & Computers",
+        "address": "8019 Wisconsin Avenue",
+        "phone": "(240) 762-6555",
+        "district": "Bethesda Row / Downtown Core",
+        "tier": 3,
+        "visitorCategory": [],
+        "residentCategory": []
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.0946871,
+          38.9840753
+        ]
+      },
+      "properties": {
+        "name": "Ultimate Performance",
+        "description": "Exercise & Health",
+        "category": "Exercise & Health",
+        "address": "7400 Wisconsin Avenue",
+        "phone": "(240) 800-3129",
+        "district": "Bethesda Row / Downtown Core",
+        "tier": 3,
+        "visitorCategory": [],
+        "residentCategory": []
+      }
+    }
+  ]
+}

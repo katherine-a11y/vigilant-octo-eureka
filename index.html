@@ -1,108 +1,167 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8" />
   <title>Discover Bethesda Map</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/mapbox-gl@3.0.1/dist/mapbox-gl.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/mapbox-gl@3.0.1/dist/mapbox-gl.js"></script>
   <style>
     html, body {
       margin: 0;
       padding: 0;
+      height: 700px; /* match iframe height */
+      font-family: sans-serif;
+      overflow: hidden;
     }
+
+    #map-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
     #map {
       width: 100%;
-      height: 100vh;
-      max-height: 600px;
+      height: 100%;
+    }
+
+    .filter-buttons {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .filter-buttons button {
+      padding: 8px 12px;
+      background-color: #2b6cb0;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 14px;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    .filter-buttons button:hover {
+      background-color: #1e4e8c;
     }
   </style>
-  <link href="https://cdn.jsdelivr.net/npm/mapbox-gl@3.0.1/dist/mapbox-gl.css" rel="stylesheet" />
-  <script src="https://cdn.jsdelivr.net/npm/mapbox-gl@3.0.1/dist/mapbox-gl.js"></script>
 </head>
 <body>
+  <div id="map-container">
+    <div class="filter-buttons">
+      <button onclick="filterMarkers('all')">All</button>
+      <button onclick="filterMarkers('dining')">Dining</button>
+      <button onclick="filterMarkers('shopping')">Shopping</button>
+      <button onclick="filterMarkers('arts')">Arts</button>
+      <button onclick="locateUser()">Near Me</button>
+    </div>
+    <div id="map"></div>
+  </div>
 
-<!-- 🔹 Filter buttons -->
-<div style="padding: 12px; text-align: center;">
-  <button onclick="filterMarkers('all')">All</button>
-  <button onclick="filterMarkers('dining')">Dining</button>
-  <button onclick="filterMarkers('culture')">Culture</button>
-</div>
+  <script>
+    mapboxgl.accessToken = 'pk.eyJ1Ijoia2NsYXJrOSIsImEiOiJjbWRzZXl1d3UwcTA0MnRvZzJmMTU2N2hoIn0.qB9Oslwgj7vvNbXFWWgfnQ';
 
-<!-- 🔹 Map container -->
-<div id="map"></div>
+    const map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/kclark9/cmdsilo3h002101p6he6f4jvo',
+      center: [-77.0940, 38.9842],
+      zoom: 15
+    });
 
-<!-- 🔹 Script to load Mapbox and markers -->
-<script>
-  mapboxgl.accessToken = 'pk.eyJ1Ijoia2NsYXJrOSIsImEiOiJjbWRzZXl1d3UwcTA0MnRvZzJmMTU2N2hoIn0.qB9Oslwgj7vvNbXFWWgfnQ';
+    const pois = [
+      {
+        name: "Bethesda Row",
+        description: "Dining + Shopping destination",
+        lat: 38.9823,
+        lng: -77.0947,
+        category: ["dining", "shopping"],
+        link: "https://www.google.com/maps/search/?api=1&query=Bethesda+Row+Bethesda+MD"
+      },
+      {
+        name: "Imagination Stage",
+        description: "Children’s theater and classes",
+        lat: 38.98994383474525,
+        lng: -77.09983109366554,
+        category: ["arts"],
+        link: "https://www.google.com/maps/search/?api=1&query=Imagination+Stage+Bethesda+MD"
+      },
+      {
+        name: "Lilit Cafe",
+        description: "Casual spot with gluten-free eats",
+        lat: 38.989489486966136,
+        lng: -77.10063630182091,
+        category: ["dining"],
+        link: "https://www.google.com/maps/search/?api=1&query=Lilit+Cafe+Bethesda+MD"
+      }
+    ];
 
-  const map = new mapboxgl.Map({
-    container: 'map',
-    style: 'mapbox://styles/kclark9/cmdsilo3h002101p6he6f4jvo',
-    center: [-77.0940, 38.9842],
-    zoom: 15
+    const allMarkers = [];
+
+fetch('businesses_updated.json')
+  .then(res => res.json())
+  .then(pois => {
+    pois.forEach(poi => {
+      const el = document.createElement('div');
+      el.className = 'custom-marker';
+
+      const icon = lucide.createElement(poi.icon || 'map-pin', {
+        size: 20,
+        color: '#2A2A2A',
+        strokeWidth: 2
+      });
+      el.appendChild(icon);
+
+      const marker = new mapboxgl.Marker(el)
+        .setLngLat([poi.longitude, poi.latitude])
+        .setPopup(
+          new mapboxgl.Popup().setHTML(`
+            <strong>${poi.name}</strong><br>
+            <small>${poi.category || ''}</small>
+          `)
+        )
+        .addTo(map);
+
+      allMarkers.push(marker);
+    });
   });
-
-  const pois = [
-    {
-      name: "Bethesda Row",
-      description: "Dining + shopping destination",
-      lat: 38.9823,
-      lng: -77.0947,
-      category: "dining",
-      link: "https://www.google.com/maps/place/4950+Elm+St,+Bethesda,+MD+20814"
-
-    },
-    {
-      name: "Imagination Stage",
-      description: "Children’s theater and classes",
-      lat: 38.9829,
-      lng: -77.0961,
-      category: "arts",
-      link: "https://www.google.com/maps/place/Imagination+Stage,+4908+Auburn+Ave,+Bethesda,+MD+20814"
-
-    },
-    {
-      name: "Lilit Cafe",
-      description: "Casual spot with gluten-free eats",
-      lat: 38.9848,
-      lng: -77.0942,
-      category: "dining",
-      link: "https://www.google.com/maps/place/Lilit+Cafe+%26+Beer+%26+Wine+Store,+7921+Old+Georgetown+Rd,+Bethesda,+MD+20814"
 
     }
-  ];
 
-  const allMarkers = [];
-
-  function addMarkers(category) {
-    // Clear old markers
-    while (allMarkers.length) allMarkers.pop().remove();
-
-    // Add matching markers
-    pois.forEach(poi => {
-      if (category === "all" || poi.category === category) {
-        const marker = new mapboxgl.Marker({ color: "#2b6cb0" })
-          .setLngLat([poi.lng, poi.lat])
-          .setPopup(
-            new mapboxgl.Popup().setHTML(`
-              <strong>${poi.name}</strong><br>
-              ${poi.description}<br>
-              <a href="${poi.link}" target="_blank">Get directions</a>
-            `)
-          )
-          .addTo(map);
-        allMarkers.push(marker);
-      }
-    });
-  }
-
-  map.on('load', () => {
-    addMarkers('all');
+ function filterMarkers(category) {
+  addMarkers(category);
+  map.easeTo({
+    center: [-77.0940, 38.9842],
+    zoom: 14
   });
+}
 
-  function filterMarkers(category) {
-    addMarkers(category);
-  }
-</script>
+    function locateUser() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(position => {
+          const userCoords = [position.coords.longitude, position.coords.latitude];
+          map.flyTo({ center: userCoords, zoom: 15 });
 
+          new mapboxgl.Marker({ color: '#d32f2f' })
+            .setLngLat(userCoords)
+            .setPopup(new mapboxgl.Popup().setHTML("📍 You are here"))
+            .addTo(map);
+        }, () => {
+          alert('Unable to retrieve your location.');
+        });
+      } else {
+        alert('Geolocation is not supported by your browser.');
+      }
+    }
+
+    map.on('load', () => {
+      addMarkers('all');
+    });
+  </script>
 </body>
 </html>
