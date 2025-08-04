@@ -180,26 +180,34 @@
 
 
 
-    function addMarkers(category) {
-      while (allMarkers.length) allMarkers.pop().remove();
+  function addMarkers(category) {
+  while (allMarkers.length) allMarkers.pop().remove();
 
-      pois.forEach(poi => {
-        const categories = Array.isArray(poi.category) ? poi.category : [poi.category];
-        if (category === "all" || categories.includes(category)) {
-          const marker = new mapboxgl.Marker({ color: "#d62828" })
-            .setLngLat([poi.lng, poi.lat])
-            .setPopup(
-              new mapboxgl.Popup().setHTML(`
-                <strong>📍 ${poi.name}</strong><br>
-                ${poi.description}<br>
-                <a href="${poi.link}" target="_blank">Get directions</a>
-              `)
-            )
-            .addTo(map);
-          allMarkers.push(marker);
-        }
-      });
+  pois.forEach(poi => {
+    const categories = Array.isArray(poi.category) ? poi.category : [poi.category];
+    if (category === "all" || categories.includes(category)) {
+      const el = document.createElement('div');
+      el.innerHTML = '📍';
+      el.style.fontSize = '24px';
+      el.style.lineHeight = '1';
+      el.style.cursor = 'pointer';
+
+      const marker = new mapboxgl.Marker({ element: el })
+        .setLngLat([poi.lng, poi.lat])
+        .setPopup(
+          new mapboxgl.Popup().setHTML(`
+            <strong>${poi.name}</strong><br>
+            ${poi.description}<br>
+            <a href="${poi.link}" target="_blank">Get directions</a>
+          `)
+        )
+        .addTo(map);
+
+      allMarkers.push(marker);
     }
+  });
+}
+
 
     function filterMarkers(category) {
       addMarkers(category);
