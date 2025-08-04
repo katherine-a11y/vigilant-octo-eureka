@@ -1,121 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Discover Bethesda Map</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="https://cdn.jsdelivr.net/npm/mapbox-gl@3.0.1/dist/mapbox-gl.css" rel="stylesheet" />
-  <script src="https://cdn.jsdelivr.net/npm/mapbox-gl@3.0.1/dist/mapbox-gl.js"></script>
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      font-family: system-ui, sans-serif;
-    }
-
-    #map-container {
-      position: relative;
-      width: 100%;
-      height: 100vh;
-    }
-
-    #map {
-      width: 100%;
-      height: 100%;
-    }
-
-    .filter-buttons {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      z-index: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .filter-buttons button {
-      padding: 8px 12px;
-      background-color: #2b6cb0;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      font-size: 14px;
-      cursor: pointer;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-    }
-
-    .filter-buttons button:hover {
-      background-color: #1e4e8c;
-    }
-
-    .plan-your-day {
-      position: absolute;
-      bottom: 12px;
-      left: 12px;
-      background: white;
-      padding: 12px;
-      border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.15);
-      z-index: 2;
-      max-width: 280px;
-    }
-
-    .plan-your-day h3 {
-      margin-top: 0;
-      font-size: 16px;
-    }
-
-    .prompt {
-      background: #f5f5f5;
-      padding: 6px 10px;
-      border-radius: 6px;
-      margin-bottom: 6px;
-      cursor: pointer;
-    }
-
-    .prompt:hover {
-      background: #e0e0e0;
-    }
-  </style>
-</head>
-<body>
-  <div id="map-container">
-    <div class="filter-buttons">
-      <button onclick="filterMarkers('all')">All</button>
-      <button onclick="filterMarkers('wellness')">Wellness</button>
-      <button onclick="filterMarkers('fitness')">Fitness</button>
-      <button onclick="filterMarkers('bookstore')">Bookstore</button>
-      <button onclick="locateUser()">📍 Near Me</button>
-    </div>
-
-    <div class="plan-your-day">
-      <h3>📍 Plan Your Day</h3>
-      <div class="prompt" onclick="filterMarkers('quiet')">🧘‍♀️ Quiet Moments</div>
-      <div class="prompt" onclick="filterMarkers('fitness')">🏋️‍♀️ Fitness & Routine</div>
-      <div class="prompt" onclick="filterMarkers('mom')">🍼 Mom-Friendly Spaces</div>
-      <div class="prompt" onclick="filterMarkers('wellness')">💅 Wellness & Self Care</div>
-      <div class="prompt" onclick="filterMarkers('bookstore')">📚 Local Book Picks</div>
-    </div>
-
-    <div id="map"></div>
-  </div>
-
-  <script>
-    mapboxgl.accessToken = 'pk.eyJ1Ijoia2NsYXJrOSIsImEiOiJjbWRzZXl1d3UwcTA0MnRvZzJmMTU2N2hoIn0.qB9Oslwgj7vvNbXFWWgfnQ';
-
-    const map = new mapboxgl.Map({
-      container: 'map',
-      style: 'mapbox://styles/kclark9/cmdsilo3h002101p6he6f4jvo',
-      center: [-77.0940, 38.9842],
-      zoom: 15
-    });
-
-    const pois = [
+const pois = [
   {
     "name": "Wonderland Books",
-    "description": "Bookstore • cozy",
+    "description": "Visit a Bookstore • Quiet Moments",
     "lat": 38.9890797,
     "lng": -77.0980395,
     "category": "bookstore",
@@ -131,7 +17,7 @@
   },
   {
     "name": "SoulCycle",
-    "description": "Fitness • community_connection",
+    "description": "Pilates & Cycling • Community Connection",
     "lat": 38.982219,
     "lng": -77.0974626,
     "category": "fitness",
@@ -139,7 +25,7 @@
   },
   {
     "name": "Club Pilates",
-    "description": "Fitness • community_connection",
+    "description": "Pilates & Cycling • Community Connection",
     "lat": 38.9821934,
     "lng": -77.0980688,
     "category": "fitness",
@@ -147,15 +33,15 @@
   },
   {
     "name": "Posh Nails",
-    "description": "Wellness • regional_favorite",
+    "description": "Wellness • Quiet Moments",
     "lat": 38.978257,
     "lng": -77.0905313,
     "category": "wellness",
-    "link": "https://www.google.com/maps/search/?api=1&query=PoshNails+Bethesda+MD"
+    "link": "https://www.google.com/maps/search/?api=1&query=Posh+Nails+Bethesda+MD"
   },
   {
     "name": "The NOW Massage",
-    "description": "Wellness • relaxing",
+    "description": "Wellness • Quiet Moments",
     "lat": 38.9785021,
     "lng": -77.0984441,
     "category": "wellness",
@@ -163,7 +49,7 @@
   },
   {
     "name": "Tea Spa",
-    "description": "Wellness • relaxing",
+    "description": "Wellness • Quiet Moments",
     "lat": 38.988656,
     "lng": -77.0990975,
     "category": "wellness",
@@ -171,7 +57,7 @@
   },
   {
     "name": "The Red Bloom Wellness Spa",
-    "description": "Wellness • relaxing",
+    "description": "Wellness • Quiet Moments",
     "lat": 38.9824281,
     "lng": -77.0983252,
     "category": "wellness",
@@ -179,58 +65,7 @@
   }
 ];
 
-    const allMarkers = [];
-
-    function addMarkers(category) {
-      while (allMarkers.length) allMarkers.pop().remove();
-
-      pois.forEach(poi => {
-        const categories = Array.isArray(poi.category) ? poi.category : [poi.category];
-        if (category === "all" || categories.includes(category)) {
-          const marker = new mapboxgl.Marker({ color: "#d62828" })
-            .setLngLat([poi.lng, poi.lat])
-            .setPopup(
-              new mapboxgl.Popup().setHTML(`
-                <strong>📍 ${poi.name}</strong><br>
-                ${poi.description}<br>
-                <a href="${poi.link}" target="_blank">Get directions</a>
-              `)
-            )
-            .addTo(map);
-          allMarkers.push(marker);
-        }
-      });
-    }
-
-    function filterMarkers(category) {
-      addMarkers(category);
-      map.easeTo({
-        center: [-77.0940, 38.9842],
-        zoom: 14
-      });
-    }
-
-    function locateUser() {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(position => {
-          const userCoords = [position.coords.longitude, position.coords.latitude];
-          map.flyTo({ center: userCoords, zoom: 15 });
-
-          new mapboxgl.Marker({ color: '#d32f2f' })
-            .setLngLat(userCoords)
-            .setPopup(new mapboxgl.Popup().setHTML("📍 You are here"))
-            .addTo(map);
-        }, () => {
-          alert('Unable to retrieve your location.');
-        });
-      } else {
-        alert('Geolocation is not supported by your browser.');
-      }
-    }
-
-    map.on('load', () => {
-      addMarkers('all');
-    });
-  </script>
-</body>
-</html>
+// Remove auto-loading markers on map load
+document.addEventListener('DOMContentLoaded', () => {
+  // No addMarkers('all') here — markers will be added only after user selection
+});
