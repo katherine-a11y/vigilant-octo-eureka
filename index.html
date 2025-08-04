@@ -7,7 +7,6 @@
   <link href="https://cdn.jsdelivr.net/npm/mapbox-gl@3.0.1/dist/mapbox-gl.css" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/mapbox-gl@3.0.1/dist/mapbox-gl.js"></script>
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
-
   <style>
     html, body {
       margin: 0;
@@ -74,28 +73,50 @@
     let allMarkers = [];
 
     function clearMarkers() {
-      allMarkers.forEach(obj => obj.marker.remove());
+      allMarkers.forEach(obj => obj.remove());
       allMarkers = [];
     }
 
     function loadMarkers(categoryFilter = 'All') {
       clearMarkers();
 
-      fetch('businesses_updated-2.json')
+      fetch('businesses.json')
         .then(res => res.json())
         .then(pois => {
           pois.forEach(poi => {
             if (categoryFilter !== 'All' && poi.category !== categoryFilter) return;
 
-            const el = document.createElement('div');
-            const iconSVG = lucide.createElement(poi.icon || 'map-pin', {
-              size: 24,
-              color: '#2A2A2A',
-              strokeWidth: 2
-            });
-            el.appendChild(iconSVG);
+            const wrapper = document.createElement('div');
+            wrapper.style.backgroundColor = '#fff';
+            wrapper.style.borderRadius = '50%';
+            wrapper.style.padding = '6px';
+            wrapper.style.display = 'flex';
+            wrapper.style.alignItems = 'center';
+            wrapper.style.justifyContent = 'center';
+            wrapper.style.width = '36px';
+            wrapper.style.height = '36px';
+            wrapper.style.boxShadow = '0 1px 4px rgba(0,0,0,0.3)';
 
-            const marker = new mapboxgl.Marker(el)
+            const iconName = poi.icon?.trim() || 'map-pin';
+
+            try {
+              const icon = lucide.createElement(iconName, {
+                size: 20,
+                color: '#2b6cb0',
+                strokeWidth: 2
+              });
+              wrapper.appendChild(icon);
+            } catch (err) {
+              console.warn(`Icon "${iconName}" not found. Using fallback.`);
+              const fallback = lucide.createElement('map-pin', {
+                size: 20,
+                color: '#2b6cb0',
+                strokeWidth: 2
+              });
+              wrapper.appendChild(fallback);
+            }
+
+            const marker = new mapboxgl.Marker(wrapper)
               .setLngLat([poi.longitude, poi.latitude])
               .setPopup(
                 new mapboxgl.Popup().setHTML(`
@@ -105,9 +126,10 @@
               )
               .addTo(map);
 
-            allMarkers.push({ marker, category: poi.category });
+            allMarkers.push(marker);
           });
-        });
+        })
+        .catch(err => console.error('Could not load JSON:', err));
     }
 
     function filterMarkers(category) {
