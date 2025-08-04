@@ -6,11 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link href="https://cdn.jsdelivr.net/npm/mapbox-gl@3.0.1/dist/mapbox-gl.css" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/mapbox-gl@3.0.1/dist/mapbox-gl.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
   <style>
     html, body {
       margin: 0;
       padding: 0;
-      height: 700px; /* match iframe height */
+      height: 700px;
       font-family: sans-serif;
       overflow: hidden;
     }
@@ -50,15 +51,25 @@
     .filter-buttons button:hover {
       background-color: #1e4e8c;
     }
+
+    .custom-marker {
+      background-color: #f3f4f6;
+      border-radius: 50%;
+      padding: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 2px rgba(0,0,0,0.15);
+    }
   </style>
 </head>
 <body>
   <div id="map-container">
     <div class="filter-buttons">
-      <button onclick="filterMarkers('all')">All</button>
-      <button onclick="filterMarkers('dining')">Dining</button>
-      <button onclick="filterMarkers('shopping')">Shopping</button>
-      <button onclick="filterMarkers('arts')">Arts</button>
+      <button onclick="addMarkers('all')">All</button>
+      <button onclick="addMarkers('exercise')">Exercise</button>
+      <button onclick="addMarkers('shopping')">Shopping</button>
+      <button onclick="addMarkers('wellness')">Wellness</button>
       <button onclick="locateUser()">Near Me</button>
     </div>
     <div id="map"></div>
@@ -74,74 +85,42 @@
       zoom: 15
     });
 
-    fetch('businesses_updated.json')
-  .then(res => res.json())
-  .then(pois => {
-    pois.forEach(poi => {
-      const el = document.createElement('div');
-      el.className = 'custom-marker';
-
-      const icon = lucide.createElement(poi.icon || 'map-pin', {
-        size: 20,
-        color: '#2A2A2A',
-        strokeWidth: 2
-      });
-      el.appendChild(icon);
-
-      const marker = new mapboxgl.Marker(el)
-        .setLngLat([poi.longitude, poi.latitude])
-        .setPopup(
-          new mapboxgl.Popup().setHTML(`
-            <strong>${poi.name}</strong><br>
-            <small>${poi.category || ''}</small>
-          `)
-        )
-        .addTo(map);
-
-      allMarkers.push(marker);
-    });
-  });
-
-
     const allMarkers = [];
+    let allPOIs = [];
 
-fetch('businesses_updated.json')
-  .then(res => res.json())
-  .then(pois => {
-    pois.forEach(poi => {
-      const el = document.createElement('div');
-      el.className = 'custom-marker';
+    function addMarkers(category) {
+      while (allMarkers.length) allMarkers.pop().remove();
 
-      const icon = lucide.createElement(poi.icon || 'map-pin', {
-        size: 20,
-        color: '#2A2A2A',
-        strokeWidth: 2
+      allPOIs.forEach(poi => {
+        const categories = Array.isArray(poi.category)
+          ? poi.category.map(c => c.toLowerCase())
+          : [poi.category.toLowerCase()];
+
+        if (category === "all" || categories.includes(category)) {
+          const el = document.createElement('div');
+          el.className = 'custom-marker';
+
+          const icon = lucide.createElement(poi.icon || 'map-pin', {
+            size: 20,
+            color: '#2A2A2A',
+            strokeWidth: 2
+          });
+          el.appendChild(icon);
+
+          const marker = new mapboxgl.Marker(el)
+            .setLngLat([poi.longitude, poi.latitude])
+            .setPopup(
+              new mapboxgl.Popup().setHTML(`
+                <strong>${poi.name}</strong><br>
+                <small>${poi.category || ''}</small>
+              `)
+            )
+            .addTo(map);
+
+          allMarkers.push(marker);
+        }
       });
-      el.appendChild(icon);
-
-      const marker = new mapboxgl.Marker(el)
-        .setLngLat([poi.longitude, poi.latitude])
-        .setPopup(
-          new mapboxgl.Popup().setHTML(`
-            <strong>${poi.name}</strong><br>
-            <small>${poi.category || ''}</small>
-          `)
-        )
-        .addTo(map);
-
-      allMarkers.push(marker);
-    });
-  });
-
     }
-
- function filterMarkers(category) {
-  addMarkers(category);
-  map.easeTo({
-    center: [-77.0940, 38.9842],
-    zoom: 14
-  });
-}
 
     function locateUser() {
       if (navigator.geolocation) {
@@ -161,9 +140,12 @@ fetch('businesses_updated.json')
       }
     }
 
-    map.on('load', () => {
-      addMarkers('all');
-    });
+    fetch('businesses_updated.json')
+      .then(res => res.json())
+      .then(data => {
+        allPOIs = data;
+        addMarkers('all');
+      });
   </script>
 </body>
 </html>
